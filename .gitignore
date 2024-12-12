@@ -1,0 +1,106 @@
+# Ignore Visual Studio temporary files, build results, and
+# common Node.js files.
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Backup & report files from converting an old project file to a newer
+# Visual Studio version. Backup files are not needed, because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.rsuser
+*_i.c
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Rider-specific files
+.idea/
+.idea_modules/
+*.iml
+*.ipr
+*.iws
+
+# VS Code directories
+.vscode/
+.vscode-test/
+
+# Node.js files
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Visual Studio files
+.vs/
+.vscode/
+ClientApp/dist/
+ClientApp/node_modules/
+
+# ASP.NET Core generated & temporary files
+clientapp/
+node_modules/
+
+# Application Insights local folder
+applicationinsights/
+
+# Local History for Rider
+.localhistory/
+
+# JetBrains Rider config
+.idea/
+*.dotSettings.user
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
+.dockerignore
+
+# .NET Core project, package, and build directories
+project.lock.json
+project.fragment.lock.json
+artifacts/
+bin/
+obj/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Razor partial views
+*.cshtml.cs
+
+# Local db files
+*.db
+*.sqlite
+*.sqlite3
+
+# Windows
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows 10 encrypted file systems
+*.eCryptfs
