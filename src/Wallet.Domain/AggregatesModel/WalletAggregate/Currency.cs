@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wallet.Domain.AggregatesModel.WalletAggregate
+﻿namespace Wallet.Domain.AggregatesModel.WalletAggregate
 {
     public class Currency(int id, string name)
         : Enumeration(id, name)
