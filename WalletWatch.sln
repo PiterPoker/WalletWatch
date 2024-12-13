@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wallet.Domain", "src\Wallet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Family", "Family", "{8DBE6BD6-2C60-44C9-8F3F-778387D5252D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Family.Domain", "Family.Domain\Family.Domain.csproj", "{FB68A914-6512-49B1-A029-1D128C0DEA2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Family.Domain", "src\Family.Domain\Family.Domain.csproj", "{FB68A914-6512-49B1-A029-1D128C0DEA2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
