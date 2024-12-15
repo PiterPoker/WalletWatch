@@ -7,3 +7,4 @@ global using Microsoft.EntityFrameworkCore.Storage;
 global using Wallet.Domain.AggregatesModel.AccountAggregate;
 global using WalletAggregate = Wallet.Domain.AggregatesModel.WalletAggregate;
 global using Wallet.Domain.SeedWork;
+global using Wallet.Domain.Exceptions;
