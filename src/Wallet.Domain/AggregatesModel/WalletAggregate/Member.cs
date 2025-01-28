@@ -2,6 +2,6 @@
 {
     public class Member : Entity
     {
-        public required string _name;
+        public string Name { get; private set; }
     }
 }
