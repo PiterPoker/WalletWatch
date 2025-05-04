@@ -1,0 +1,199 @@
+@Wallet_API_HostAddress = http://localhost:8080/api
+@Wallet_API_Controller_Wallets = Wallets
+@Wallet_API_Controller_SubWallets = SubWallets
+@Wallet_API_Controller_Accounts = Accounts
+
+### Get all wallets
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}?pageIndex=1&pageSize=3
+Accept: application/json
+
+### Get wallet by ID
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+Accept: application/json
+
+### Create a new wallet
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}
+Content-Type: application/json
+
+{
+  "balance": 1000,
+  "currency": "BYN",
+    "Description": "Example Wallet",
+    "Family": {
+        "Id" : 1,
+        "Name": "Example Family",
+        "HeadMember": {
+            "Id" : 1,
+            "Name": "John Doe"
+        }
+    }
+}
+
+
+### Update a wallet
+PUT {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "description": "Doe's Wallet",
+  "family": {
+    "id": 1,
+    "name": "Doe Family",
+    "headMember": {
+      "id": 1,
+      "name": "John Doe"
+    }
+  },
+  "subWallets": [],
+  "id": 1,
+  "balance": 1000,
+  "currency": "BYN"
+}
+
+### Delete wallet
+DELETE {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+
+###Transfer funds
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/TransferFunds
+Content-Type: application/json
+
+{
+    "fromWalletId": 1,
+    "toWalletId": 2,
+    "amount": 100.00
+}
+
+###Create sub-wallet
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_SubWallets}}
+Content-Type: application/json
+
+{
+    "family": {
+      "id": 1,
+      "name": "string",
+      "headMember": {
+        "id": 1,
+        "name": "John Doe"
+      }
+    },
+    "description": "Подкошелёк для семьи",
+    "parentWalletId": 1,
+    "balance": 0,
+    "currency": "BYN",
+    "familyMembers": [
+        {
+            "id": 101,
+            "name": "Иван Иванов"
+        },
+        {
+            "id": 102,
+            "name": "Мария Петрова"
+        }
+    ]
+}
+
+### Updated sub-wallet
+PUT {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_SubWallets}}/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "balance": 100.50,
+    "currencyId": 1,
+    "description": "Updated description",
+    "family": {
+        "id": 1,
+        "name": "Doe Family"
+    },
+    "subWallets": [],
+    "parentWalletId": 1,
+    "familyMembers": [
+        {
+            "id": 1,
+            "name": "Alice"
+        },
+        {
+            "id": 2,
+            "name": "Bob"
+        }
+    ]
+}
+
+### Delete sub-wallet
+DELETE {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_SubWallets}}/1
+
+### Получить все подкошельки с пагинацией
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_SubWallets}}?pageIndex=1&pageSize=10
+Accept: application/json
+
+### Получить подкошелёк по Id
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_SubWallets}}/5
+Accept: application/json
+
+###
+
+###
+
+# Создать новый персональный счёт
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}
+Content-Type: application/json
+
+{
+  "profileId": 1,
+  "balance": 1000,
+  "currency": "USD",
+  "description": "Personal Savings Account"
+}
+
+###
+
+# Получить все персональные счета с пагинацией
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}?pageIndex=1&pageSize=10
+
+###
+
+# Получить персональный счёт по Id
+GET {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+
+###
+
+# Обновить информацию по персональному счёту
+PUT {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+Content-Type: application/json
+
+{
+  "profileId": 1,
+  "balance": 2000,
+  "currency": "USD",
+  "description": "Updated Savings Account"
+}
+
+###
+
+# Удалить персональный счёт по Id
+DELETE {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/1
+
+###
+
+# Перевести средства между персональными счетами
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/TransferFunds
+Content-Type: application/json
+
+{
+  "fromAccountId": 1,
+  "toAccountId": 2,
+  "amount": 500
+}
+
+###
+
+# Добавить средства на персональный счёт
+POST {{Wallet_API_HostAddress}}/{{Wallet_API_Controller_Wallets}}/AddFunds
+Content-Type: application/json
+
+{
+  "accountId": 1,
+  "profileId": 1,
+  "amount": 300
+}
