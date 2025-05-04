@@ -1,0 +1,195 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    environment:
+    - RabbitMqUser=guest
+    - RabbitMqPassword=guest
+    - RabbitMqVhost=/
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    networks:
+      - app-network
+    healthcheck:
+        test: ["CMD", "rabbitmq-diagnostics", "ping"]
+        interval: 30s
+        retries: 5
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis.authwalletwatch
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+  family.postgres:
+    image: postgres:15-alpine
+    container_name: postgres.family
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=FamilyDb
+    ports:
+       - "5433:5432"
+    volumes:
+      - family_pgdata:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d FamilyDb"]
+        interval: 30s
+        retries: 5
+    networks:
+      - app-network
+
+  wallet.postgres:
+    image: postgres:15-alpine
+    container_name: postgres.wallet
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: WalletDb
+    ports:
+      - "5434:5432"
+    volumes:
+      - wallet_pgdata:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d WalletDb"]
+        interval: 30s
+        retries: 5
+    networks:
+      - app-network
+
+  expences.postgres:
+    image: postgres:15-alpine
+    container_name: postgres.expences
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ExpencesDb
+    ports:
+      - "5435:5432"
+    volumes:
+      - expences_pgdata:/var/lib/postgresql/data
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U postgres -d ExpencesDb"]
+        interval: 30s
+        retries: 5
+    networks:
+      - app-network
+        
+  
+  auth.postgres:
+    image: postgres:15-alpine
+    container_name: postgres.auth
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=AuthDb
+    ports:
+      - "5436:5432"
+    volumes:
+      - auth_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d AuthDb"]
+      interval: 30s
+      retries: 5
+    networks:
+      - app-network
+
+  family.api:
+    image: ${DOCKER_REGISTRY-}family.api
+    build:
+        context: .
+        dockerfile: src/FamilyMicroservice/Family.API/Dockerfile
+    container_name: api.family
+    depends_on:
+        rabbitmq:
+            condition: service_healthy
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - CONNECTION_STRING=Host=family.postgres;Port=5432;Database=FamilyDb;Username=postgres;Password=postgres
+        - RabbitMqHost=rabbitmq
+        - RabbitMqPort=5672
+        - RabbitMqUser=guest
+        - RabbitMqPassword=guest
+    ports:
+        - "8880:80"
+    networks:
+        - app-network
+
+  wallet.api:
+        image: ${DOCKER_REGISTRY-}wallet.api
+        container_name: api.wallet
+        build:
+          context: .
+          dockerfile: src/Wallet/Wallet.API/Dockerfile
+        environment: 
+        - CONNECTION_STRING=Host=wallet.postgres;Port=5432;Database=WalletDb;Username=postgres;Password=postgres
+        - ASPNETCORE_ENVIRONMENT=Development
+        ports:
+          - "8881:81"
+        depends_on:
+          rabbitmq:
+            condition: service_healthy
+          wallet.postgres:
+            condition: service_healthy 
+        networks:
+          - app-network
+  
+  expences.api:
+    image: ${DOCKER_REGISTRY-}expences.api
+    container_name: api.expences
+    build:
+        context: .
+        dockerfile: src/Expenses/Expenses.API/Dockerfile
+    environment: 
+        - ASPNETCORE_ENVIRONMENT=Development
+        - CONNECTION_STRING=Host=expences.postgres;Port=5432;Database=ExpencesDb;Username=postgres;Password=postgres
+    ports:
+        - "8882:82"
+    depends_on:
+        rabbitmq:
+            condition: service_healthy
+        expences.postgres:
+            condition: service_healthy 
+    networks:
+        - app-network
+
+  auth.api:
+    image: ${DOCKER_REGISTRY-}api.auth
+    container_name: api.auth
+    build:
+      context: .
+      dockerfile: src/AuthWalletWatch/AuthWalletWatch.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CONNECTION_STRING=Host=auth.postgres;Port=5432;Database=AuthDb;Username=postgres;Password=postgres
+      - CONNECTION_STRING_REDIS=redis:6379
+    ports:
+      - "8883:83"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      auth.postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - app-network
+  
+volumes:
+  family_pgdata:
+  wallet_pgdata:
+  expences_pgdata:
+  auth_pgdata:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge  

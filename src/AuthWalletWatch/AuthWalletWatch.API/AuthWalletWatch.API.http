@@ -1,0 +1,41 @@
+@AuthWalletWatch.API_HostAddress = https://localhost:58249
+
+### Register User
+POST {{AuthWalletWatch.API_HostAddress}}/api/Account/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@admin.com",
+  "password": "Aaaa123!",
+  "confirmPassword": "Aaaa123!"
+}
+
+### Login User
+POST {{AuthWalletWatch.API_HostAddress}}/api/Account/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "Aaaa123!"
+}
+
+### Refresh
+POST {{AuthWalletWatch.API_HostAddress}}/api/Account/refresh
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjdlZDU2YjQwLTllM2QtNGE2OS04NmY4LTg5M2Y3YzAwMGQ2YyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluQGFkbWluLmNvbSIsIm5iZiI6MTc0NDY2NjQ0OSwiZXhwIjoxNzQ0NjcwMDQ5LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjgwIn0.P2bvpZenhPY2q1HtVaFcxLJ7VDesxs1hMI_zzLPkw7s
+
+{
+  "refreshToken": "OdZ1Rxo8NJMWuiu4N7RqBZGZhhaDd4yOV0LpyRspVC47Q5P1rKJybZmb4Stv2O4KaGSqC9a3At3+XHzacbX8Hg=="
+}
+
+### Change password
+POST {{AuthWalletWatch.API_HostAddress}}/api/Account/password
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjdlZDU2YjQwLTllM2QtNGE2OS04NmY4LTg5M2Y3YzAwMGQ2YyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluQGFkbWluLmNvbSIsIm5iZiI6MTc0NDY2NjQ0OSwiZXhwIjoxNzQ0NjcwMDQ5LCJpc3MiOiJkb3RuZXQtdXNlci1qd3RzIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MjgwIn0.P2bvpZenhPY2q1HtVaFcxLJ7VDesxs1hMI_zzLPkw7s
+
+{
+  "currentPassword": "Aaaa123!",
+  "newPassword": "Bbbb123!"
+}
+
