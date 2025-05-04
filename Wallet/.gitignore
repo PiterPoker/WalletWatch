@@ -1,0 +1,53 @@
+# Основные файлы и папки
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.suo
+*.cache
+*.generated.cs
+*.pidb
+*.svclog
+*.userprefs
+
+# Rider-специфичные файлы
+.idea/
+*.sln.iml
+
+# Файлы сборки
+*.dll
+*.exe
+*.pdb
+*.mdb
+
+# Лог-файлы
+*.log
+
+# Конфигурационные файлы
+appsettings.json
+
+# Секреты и конфиденциальные данные
+*.config
+*.key
+*.env
+
+# Mac-специфичные файлы
+.DS_Store
+
+# Windows-специфичные файлы
+Thumbs.db
+desktop.ini
+
+# Node.js
+node_modules/
+
+# Yarn
+.yarn/
+.pnp.*
+
+# VS Code
+.vscode/
+
+# Кэш NPM
+npm-debug.log*
+/.vs

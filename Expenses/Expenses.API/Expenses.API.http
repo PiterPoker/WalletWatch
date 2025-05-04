@@ -1,0 +1,131 @@
+@Expenses.API_HostAddress = http://localhost:8080
+
+###
+### Get all authors
+GET {{Expenses.API_HostAddress}}/api/authors
+
+### Get author by ID
+GET {{Expenses.API_HostAddress}}/api/authors/1
+
+### Create author
+POST {{Expenses.API_HostAddress}}/api/authors
+Content-Type: application/json
+
+{
+  "name": "New Author"
+}
+
+### Update author
+PUT {{Expenses.API_HostAddress}}/api/authors/1
+Content-Type: application/json
+
+{
+  "name": "Updated Author"
+}
+
+### Delete author
+DELETE {{Expenses.API_HostAddress}}/api/authors/1
+
+### Get all wallets
+GET {{Expenses.API_HostAddress}}/api/wallets
+
+### Get wallet by ID
+GET {{Expenses.API_HostAddress}}/api/wallets/2
+
+### Create wallet
+POST {{Expenses.API_HostAddress}}/api/wallets
+Content-Type: application/json
+
+{
+  "name": "New Wallet",
+  "balance": 1000.00
+}
+
+### Update wallet
+PUT {{Expenses.API_HostAddress}}/api/wallets/1
+Content-Type: application/json
+
+{
+  "name": "Updated Wallet",
+  "balance": 1500.00
+}
+
+### Delete wallet
+DELETE {{Expenses.API_HostAddress}}/api/wallets/1
+
+### Get all categories
+GET {{Expenses.API_HostAddress}}/api/categories
+
+### Get category by ID
+GET {{Expenses.API_HostAddress}}/api/categories/21
+
+### Create category
+POST {{Expenses.API_HostAddress}}/api/categories
+Content-Type: application/json
+
+{
+  "name": "New Category",
+  "color": "Red",
+  "authorId" : 2
+}
+
+### Update category
+PUT {{Expenses.API_HostAddress}}/api/categories/21
+Content-Type: application/json
+
+{
+  "name": "Updated Category",
+  "color": "Blue"
+}
+
+### Delete category
+DELETE {{Expenses.API_HostAddress}}/api/categories/1
+
+### Get expense by ID
+GET {{Expenses.API_HostAddress}}/api/expenses/1
+
+### Create expense
+POST {{Expenses.API_HostAddress}}/api/expenses
+Content-Type: application/json
+
+{
+  "description": "New Expense",
+  "amount": 50.00,
+  "currency": "BYN",
+  "date": "2024-01-01T12:00:00Z",
+  "categoryId": 31,
+  "walletId": 2,
+  "authorId": 2
+}
+
+### Update expense
+PUT {{Expenses.API_HostAddress}}/api/expenses/1
+Content-Type: application/json
+
+{
+  "description": "Updated Expense",
+  "amount": 75.00,
+  "currency": "RUB",
+  "date": "2024-01-02T12:00:00Z",
+  "categoryId": 21,
+  "walletId": 2,
+  "authorId": 2
+}
+
+### Delete expense
+DELETE {{Expenses.API_HostAddress}}/api/expenses/1
+
+### Get expenses by authors
+GET {{Expenses.API_HostAddress}}/api/expenses/authors?authorIds=1&authorIds=2
+
+### Get expenses by category
+GET {{Expenses.API_HostAddress}}/api/expenses/category/2
+
+### Get expenses by period
+GET {{Expenses.API_HostAddress}}/api/expenses/period?startDate=2024-01-01Z&endDate=2024-01-31Z
+
+### Get expenses by wallet
+GET {{Expenses.API_HostAddress}}/api/expenses/wallet/1
+
+### Get all expenses
+GET {{Expenses.API_HostAddress}}/api/expenses/all

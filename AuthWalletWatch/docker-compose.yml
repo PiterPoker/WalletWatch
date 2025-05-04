@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db_postgres:
+    image: postgres:latest
+    container_name: postgres.authwalletwatch
+    restart: always
+    environment:
+      POSTGRES_USER: artem
+      POSTGRES_PASSWORD: Qq123456
+      POSTGRES_DB: authwalletwatchdb
+      POSTGERS_CONNECTION: Host=postgres.authwalletwatch;Port=5432;Database=authwalletwatchdb;Username=artem;Password=Qq123456
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin4.authwalletwatch
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: Qq123456
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  authwalletwatch.api:
+    image: ${DOCKER_REGISTRY-}authwalletwatchapi
+    build:
+      context: .
+      dockerfile: AuthWalletWatch.API/Dockerfile
+    depends_on:
+      - redis
+    environment: 
+      CONNECTION_STRING: Host=postgres.authwalletwatch;Port=5432;Database=authwalletwatchdb;Username=artem;Password=Qq123456
+      CONNECTION_STRING_REDIS: redis:6379
+    ports:
+      - "8080:8080"
+
+  redis:
+    image: redis:latest
+    container_name: redis.authwalletwatch
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+volumes:
+  pgdata:
+  pgadmin_data:
+  redis-data:

@@ -1,0 +1,10 @@
+name: ExpensesService
+
+services:
+  expenses.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - CONNECTION_STRING=Host=postgres.expenses;Port=5432;Database=expensesdb;Username=artem;Password=Qq123456
+    ports:
+      - "8080:8080"
