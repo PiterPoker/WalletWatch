@@ -1,0 +1,59 @@
+{
+  "Routes": [
+    // Маршруты для Family API
+    {
+      "UpstreamPathTemplate": "/f/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "Family.API",
+          "Port": 80
+        }
+      ]
+    },
+    // Маршруты для Wallet API
+    {
+      "UpstreamPathTemplate": "/w/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "Wallet.API",
+          "Port": 80
+        }
+      ]
+    },
+    // Маршруты для Expences API
+    {
+      "UpstreamPathTemplate": "/e/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "Expenses.API",
+          "Port": 80
+        }
+      ]
+    },
+    // Маршруты для Auth API
+    {
+      "UpstreamPathTemplate": "/a/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "AuthWalletWatch.API",
+          "Port": 80
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:50500"
+  }
+}

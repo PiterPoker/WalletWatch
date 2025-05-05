@@ -10,7 +10,8 @@ services:
       - "5673:5672"
       - "15673:15672"
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.11
     healthcheck:
         test: ["CMD", "rabbitmq-diagnostics", "ping"]
         interval: 30s
@@ -25,7 +26,8 @@ services:
     volumes:
       - redis-data:/data
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.10
 
   family.postgres:
     image: postgres:15-alpine
@@ -43,7 +45,8 @@ services:
         interval: 30s
         retries: 5
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.9
 
   wallet.postgres:
     image: postgres:15-alpine
@@ -62,7 +65,8 @@ services:
         interval: 30s
         retries: 5
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.8
 
   expences.postgres:
     image: postgres:15-alpine
@@ -81,7 +85,8 @@ services:
         interval: 30s
         retries: 5
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.7
         
   
   auth.postgres:
@@ -100,70 +105,73 @@ services:
       interval: 30s
       retries: 5
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.6
 
   family.api:
     image: ${DOCKER_REGISTRY-}family.api
     build:
-        context: .
-        dockerfile: src/FamilyMicroservice/Family.API/Dockerfile
-    container_name: api.family
+      context: .
+      dockerfile: src/FamilyMicroservice/Family.API/Dockerfile
     depends_on:
-        rabbitmq:
+      rabbitmq:
             condition: service_healthy
     environment:
-        - ASPNETCORE_ENVIRONMENT=Development
-        - CONNECTION_STRING=Host=family.postgres;Port=5432;Database=FamilyDb;Username=postgres;Password=postgres
-        - RabbitMqHost=rabbitmq
-        - RabbitMqPort=5672
-        - RabbitMqUser=guest
-        - RabbitMqPassword=guest
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CONNECTION_STRING=Host=family.postgres;Port=5432;Database=FamilyDb;Username=postgres;Password=postgres
+      - RabbitMqHost=rabbitmq
+      - RabbitMqPort=5672
+      - RabbitMqUser=guest
+      - RabbitMqPassword=guest
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
-        - "8880:80"
+      - "5200:80"
     networks:
-        - app-network
+      app-network:
+        ipv4_address: 172.18.0.5
 
   wallet.api:
-        image: ${DOCKER_REGISTRY-}wallet.api
-        container_name: api.wallet
-        build:
-          context: .
-          dockerfile: src/Wallet/Wallet.API/Dockerfile
-        environment: 
-        - CONNECTION_STRING=Host=wallet.postgres;Port=5432;Database=WalletDb;Username=postgres;Password=postgres
-        - ASPNETCORE_ENVIRONMENT=Development
-        ports:
-          - "8881:81"
-        depends_on:
-          rabbitmq:
-            condition: service_healthy
-          wallet.postgres:
-            condition: service_healthy 
-        networks:
-          - app-network
+    image: ${DOCKER_REGISTRY-}wallet.api
+    build:
+      context: .
+      dockerfile: src/Wallet/Wallet.API/Dockerfile
+    environment: 
+      - CONNECTION_STRING=Host=wallet.postgres;Port=5432;Database=WalletDb;Username=postgres;Password=postgres
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+    ports:
+      - "5300:80"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      wallet.postgres:
+        condition: service_healthy 
+    networks:
+      app-network:
+        ipv4_address: 172.18.0.4
   
   expences.api:
     image: ${DOCKER_REGISTRY-}expences.api
-    container_name: api.expences
     build:
-        context: .
-        dockerfile: src/Expenses/Expenses.API/Dockerfile
+      context: .
+      dockerfile: src/Expenses/Expenses.API/Dockerfile
     environment: 
-        - ASPNETCORE_ENVIRONMENT=Development
-        - CONNECTION_STRING=Host=expences.postgres;Port=5432;Database=ExpencesDb;Username=postgres;Password=postgres
+      - ASPNETCORE_ENVIRONMENT=Development
+      - CONNECTION_STRING=Host=expences.postgres;Port=5432;Database=ExpencesDb;Username=postgres;Password=postgres
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
-        - "8882:82"
+      - "5400:80"
     depends_on:
-        rabbitmq:
-            condition: service_healthy
-        expences.postgres:
-            condition: service_healthy 
+      rabbitmq:
+        condition: service_healthy
+      expences.postgres:
+        condition: service_healthy 
     networks:
-        - app-network
+      app-network:
+        ipv4_address: 172.18.0.3
 
   auth.api:
     image: ${DOCKER_REGISTRY-}api.auth
-    container_name: api.auth
     build:
       context: .
       dockerfile: src/AuthWalletWatch/AuthWalletWatch.API/Dockerfile
@@ -171,8 +179,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - CONNECTION_STRING=Host=auth.postgres;Port=5432;Database=AuthDb;Username=postgres;Password=postgres
       - CONNECTION_STRING_REDIS=redis:6379
+      - ASPNETCORE_URLS=http://0.0.0.0:80
     ports:
-      - "8883:83"
+      - "5500:80"
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -181,7 +190,28 @@ services:
       redis:
         condition: service_started
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.2
+  
+  apigateway:
+    build:
+      context: .
+      dockerfile: src/ApiGateway/Dockerfile
+    ports:
+      - "50500:8080"
+    depends_on:
+      - wallet.api
+      - auth.api
+      - family.api
+      - expences.api
+    extra_hosts:
+      - "AuthWalletWatch.API:172.18.0.2"
+      - "Expenses.API:172.18.0.3"
+      - "Wallet.API:172.18.0.4"
+      - "Family.API:172.18.0.5"
+    networks:
+      app-network:
+        ipv4_address: 172.18.0.12
   
 volumes:
   family_pgdata:
@@ -192,4 +222,7 @@ volumes:
 
 networks:
   app-network:
-    driver: bridge  
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
