@@ -53,7 +53,7 @@ public class AuthorsController : ControllerBase
         }
     }
 
-    [HttpGet("{id:long}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(AuthorDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "Retrieves an author by ID")]
@@ -81,7 +81,7 @@ public class AuthorsController : ControllerBase
         }
     }
 
-    [HttpPut("{id:long}")]
+    [HttpPut("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
@@ -111,7 +111,7 @@ public class AuthorsController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:long}")]
+    [HttpDelete("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [SwaggerOperation(Summary = "Deletes an author by ID")]
     public async Task<IActionResult> DeleteAuthor([SwaggerParameter(Description = "The unique identifier of the author to delete")] Guid id)

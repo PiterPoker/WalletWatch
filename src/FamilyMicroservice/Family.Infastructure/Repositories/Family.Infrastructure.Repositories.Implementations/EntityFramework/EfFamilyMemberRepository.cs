@@ -10,7 +10,7 @@ public class EfFamilyMemberRepository(FamilyDbContext context) : EfRepository<Fa
     public async Task<IEnumerable<FamilyMember>> GetAllMembersByFamilyIdAsync(Guid familyId)
     {
         var family = await _context.Family.FindAsync(familyId);
-        return family is null ? new List<FamilyMember>() : family.FamilyMembers;
+        return family is null ? new List<FamilyMember>() : _context.FamilyMember.Where(fm => fm.FamilyId == familyId);
     }
 
     public async Task<FamilyMember> GetFamilyMemberByUserIdAsync(Guid userInfoId, Guid familyId)

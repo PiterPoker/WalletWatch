@@ -53,7 +53,7 @@ public class CategoriesController : ControllerBase
         }
     }
 
-    [HttpGet("{id:long}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(CategoryDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "Retrieves a category by ID")]
@@ -102,7 +102,7 @@ public class CategoriesController : ControllerBase
         }
     }
 
-    [HttpPut("{id:long}")]
+    [HttpPut("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [SwaggerOperation(Summary = "Updates an existing category by ID")]
@@ -131,7 +131,7 @@ public class CategoriesController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:long}")]
+    [HttpDelete("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [SwaggerOperation(Summary = "Deletes a category by ID")]
     public async Task<IActionResult> DeleteCategory([SwaggerParameter(Description = "The unique identifier of the category to delete")] Guid id)
