@@ -24,13 +24,13 @@ namespace Wallet.API.Controllers
 
 
         /// <summary>
-        /// Получает все кошельки.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         /// </summary>
-        /// <returns>Список всех кошельков</returns>
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</returns>
         [HttpGet]
-        [SwaggerOperation(Summary = "Получить все кошельки", Description = "Возвращает список всех кошельков из базы данных.")]
-        [SwaggerResponse(200, "Возвращает список всех кошельков", typeof(PaginatedItems<WalletOfFamily.WalletReadModel>))]
-        public async Task<ActionResult<PaginatedItems<WalletOfFamily.WalletReadModel>>> GetWallets(CancellationToken cancellation, [SwaggerParameter(Description = "Страница")] int pageIndex = 1, [SwaggerParameter(Description = "Количество записей на странице")] int pageSize = 10)
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.")]
+        [SwaggerResponse(200, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", typeof(PaginatedItems<WalletOfFamily.WalletReadModel>))]
+        public async Task<ActionResult<PaginatedItems<WalletOfFamily.WalletReadModel>>> GetWallets(CancellationToken cancellation, [SwaggerParameter(Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")] int pageIndex = 1, [SwaggerParameter(Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")] int pageSize = 10)
         {
             try
             {
@@ -46,13 +46,13 @@ namespace Wallet.API.Controllers
 
 
         /// <summary>
-        /// Получить кошелёк по Id.
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Id.
         /// </summary>
-        /// <returns>Кошелёк с указанным Id</returns>
-        [HttpGet("{id:long}")]
-        [SwaggerOperation(Summary = "Получить кошелёк по Id", Description = "Кошелёк с указанным Id из базы данных.")]
-        [SwaggerResponse(200, "Кошелёк с указанным Id из базы данных.", typeof(WalletOfFamily.WalletReadModel))]
-        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> GetWallet([SwaggerParameter(Description = "Id кошелька", Required = true)] Guid id, CancellationToken cancellation)
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Id</returns>
+        [HttpGet("{id:guid}")]
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Id", Description = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Id пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.")]
+        [SwaggerResponse(200, "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Id пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.", typeof(WalletOfFamily.WalletReadModel))]
+        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> GetWallet([SwaggerParameter(Description = "Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Required = true)] Guid id, CancellationToken cancellation)
         {
             try
             {
@@ -68,13 +68,13 @@ namespace Wallet.API.Controllers
 
 
         /// <summary>
-        /// Создать кошелёк
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
-        /// <returns>Созданный кошелёк.</returns>
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
         [HttpPost]
-        [SwaggerOperation(Summary = "Создать кошелёк", Description = "Возвращает созданный кошелёк.")]
-        [SwaggerResponse(200, "Возвращает созданный кошелёк", typeof(WalletOfFamily.WalletReadModel))]
-        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> Create([SwaggerRequestBody("Информация о новом кошельке семьи")] WalletWriteModel wallet, CancellationToken cancellation)
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.")]
+        [SwaggerResponse(200, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", typeof(WalletOfFamily.WalletReadModel))]
+        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> Create([SwaggerRequestBody("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")] WalletWriteModel wallet, CancellationToken cancellation)
         {
             try
             {
@@ -92,13 +92,13 @@ namespace Wallet.API.Controllers
 
 
         /// <summary>
-        /// Обновляет информацию по кошельку
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
-        /// <returns>Возвращает обновленную информацию по кошельку.</returns>
-        [HttpPut("{id:long}")]
-        [SwaggerOperation(Summary = "Обновить информацию по кошельку", Description = "Возвращает обновленную информацию по кошельку.")]
-        [SwaggerResponse(200, "Возвращает обновленную информацию по кошельку", typeof(WalletOfFamily.WalletReadModel))]
-        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> Update([SwaggerParameter(Description = "Id кошелька", Required = true)] Guid id, [SwaggerRequestBody(Description = "Данные для обновления", Required = true)] WalletWriteModel updateWallet, CancellationToken cancellation)
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</returns>
+        [HttpPut("{id:guid}")]
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")]
+        [SwaggerResponse(200, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", typeof(WalletOfFamily.WalletReadModel))]
+        public async Task<ActionResult<WalletOfFamily.WalletReadModel>> Update([SwaggerParameter(Description = "Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Required = true)] Guid id, [SwaggerRequestBody(Description = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Required = true)] WalletWriteModel updateWallet, CancellationToken cancellation)
         {
             try
             {
@@ -114,15 +114,15 @@ namespace Wallet.API.Controllers
 
 
         /// <summary>
-        /// Удалить кошелёк
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         /// </summary>
-        /// <param name="id">Id кошелька</param>
-        /// <param name="cancellation">Токен отмены</param>
-        [HttpDelete("{id:long}")]
-        [SwaggerOperation(Summary = "Удалить кошелёк", Description = "Возвращает статус 204 при успешном выполнении.")]
-        [SwaggerResponse(204, "Возвращает при успешном выполнении")]
-        [SwaggerResponse(400, "Ошибка при удалении кошелька", typeof(string))]
-        public async Task<IActionResult> Delete([SwaggerParameter(Description = "Id кошелька", Required = true)] Guid id, CancellationToken cancellation)
+        /// <param name="id">Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ</param>
+        /// <param name="cancellation">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ</param>
+        [HttpDelete("{id:guid}")]
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ", Description = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 204 пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")]
+        [SwaggerResponse(204, "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ")]
+        [SwaggerResponse(400, "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", typeof(string))]
+        public async Task<IActionResult> Delete([SwaggerParameter(Description = "Id пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Required = true)] Guid id, CancellationToken cancellation)
         {
             try
             {
@@ -138,19 +138,19 @@ namespace Wallet.API.Controllers
         }
 
         /// <summary> 
-        /// Переводит указанную сумму денег между основным кошельком и подкошельком. 
+        /// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. 
         /// </summary> 
-        /// <param name="transferFunds">Запрос с данными для перевода.</param> 
-        /// <param name="cancellation">Токен отмены операции.</param> 
-        /// <returns>Результат операции перевода средств.</returns> 
-        /// <response code="200">Успешный перевод средств.</response> 
-        /// <response code="400">Неверный запрос или логическая ошибка (например, несовпадение семей).</response>
-        /// <response code="500">Внутренняя ошибка сервера.</response> 
+        /// <param name="transferFunds">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</param> 
+        /// <param name="cancellation">пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</param> 
+        /// <returns>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</returns> 
+        /// <response code="200">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</response> 
+        /// <response code="400">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ).</response>
+        /// <response code="500">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</response> 
         [HttpPost("TransferFunds")]
-        [SwaggerOperation(Summary = "Переводит указанную сумму денег между основным кошельком и подкошельком.")]
+        [SwaggerOperation(Summary = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.")]
         [SwaggerResponse(200, "Funds transferred successfully.")]
         [SwaggerResponse(400, "Invalid request or logic error.")]
-        public async Task<IActionResult> TransferFunds([SwaggerRequestBody(Description = "Данные для перевода средств между кошельками", Required = true)] WalletTransferFundsWriteModel transferFunds, CancellationToken cancellation)
+        public async Task<IActionResult> TransferFunds([SwaggerRequestBody(Description = "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", Required = true)] WalletTransferFundsWriteModel transferFunds, CancellationToken cancellation)
         {
             _logger.LogInformation("Initiating transfer of {Amount} from wallet {MainWalletId} to wallet {request.SubWalletId}.", transferFunds.Amount, transferFunds.FromWalletId, transferFunds.ToWalletId);
             try

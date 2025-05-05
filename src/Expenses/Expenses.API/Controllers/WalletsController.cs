@@ -53,7 +53,7 @@ public class WalletsController : ControllerBase
         }
     }
 
-    [HttpGet("{id:long}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(WalletDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "Retrieves a wallet by ID")]
@@ -131,7 +131,7 @@ public class WalletsController : ControllerBase
         }
     }
 
-    [HttpDelete("{id:long}")]
+    [HttpDelete("{id:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [SwaggerOperation(Summary = "Deletes a wallet by ID")]
     public async Task<IActionResult> DeleteWallet([SwaggerParameter(Description = "The unique identifier of the wallet to delete")] Guid id)

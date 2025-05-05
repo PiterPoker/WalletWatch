@@ -54,7 +54,7 @@ public class ExpensesController : ControllerBase
         }
     }
 
-    [HttpGet("{expenseId:long}")]
+    [HttpGet("{expenseId:guid}")]
     [ProducesResponseType(typeof(ExpenseDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     [SwaggerOperation(Summary = "Retrieves an expense by ID")]
@@ -117,7 +117,7 @@ public class ExpensesController : ControllerBase
         }
     }
 
-    [HttpDelete("{expenseId:long}")]
+    [HttpDelete("{expenseId:guid}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [SwaggerOperation(Summary = "Deletes an expense by ID")]
     public async Task<IActionResult> DeleteExpense([SwaggerParameter(Description = "The unique identifier of the expense to delete")] Guid expenseId)
@@ -159,7 +159,7 @@ public class ExpensesController : ControllerBase
         }
     }
 
-    [HttpGet("category/{categoryId:long}")]
+    [HttpGet("category/{categoryId:guid}")]
     [ProducesResponseType(typeof(List<ExpenseDto>), (int)HttpStatusCode.OK)]
     [SwaggerOperation(Summary = "Retrieves expenses by category ID")]
     public async Task<ActionResult<List<ExpenseDto>>> GetExpensesByCategoryId([SwaggerParameter(Description = "The unique identifier of the category")] Guid categoryId)
@@ -201,7 +201,7 @@ public class ExpensesController : ControllerBase
         }
     }
 
-    [HttpGet("wallet/{walletId:long}")]
+    [HttpGet("wallet/{walletId:guid}")]
     [ProducesResponseType(typeof(List<ExpenseDto>), (int)HttpStatusCode.OK)]
     [SwaggerOperation(Summary = "Retrieves expenses by wallet ID")]
     public async Task<ActionResult<List<ExpenseDto>>> GetExpensesByWalletId([SwaggerParameter(Description = "The unique identifier of the wallet")] Guid walletId)
